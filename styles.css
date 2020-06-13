@@ -71,6 +71,8 @@ h2 {
 #left #about img {
   max-width: 40%;
   border-radius: 50%;
+  float: left;
+  padding-right: 10px;
 }
 
 #right {
