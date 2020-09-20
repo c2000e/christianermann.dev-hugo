@@ -1,103 +1,96 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="author" content="Christian Ermann"/>
-    <title>Christian Ermann</title>
-    <link rel="stylesheet" href="styles.css"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Rokkitt:wght@300&display=swap"/>
-  </head>
-  
-  <body>
-    <div id="header" class="vertical horizontal">
-      <h1>Hi, I'm Christian!</h1>
-    </div>
-   
-    <div id="columns">
-      <div id="left">
-        <div id="about" class="vertical">
-          <h2>About me:</h2>
-          <img src="images/profile.jpg" alt="Profile of Christian Ermann"/>
-          <p>
-             I'm a junior at Lewis &amp; Clark College with a passion for math,
-             physics, and computer science. My main focus is always my
-             coursework, but I enjoy being involved outside of the classroom as
-             well. I joined the rowing team my first semester of college and I
-             have competed on the L&amp;C Men's Varsity Crew Team each semester
-             since, with teammates who quickly became great friends. Since the
-             beginning of my sophomore year, I've worked both as a STEM tutor,
-             helping other students to prepare for upcoming exams and understand
-             assignments, and as a lab assistant, aiding other students in
-             understanding physics principles through experimentation, alongside
-             various professors. Aside from math and physics, I've also taken
-             three semesters of Mandarin and plan to study abroad in the spring
-             of 2021 in a language intensive program at National Taiwan
-             University in Taipei.
-          </p>
-        </div>
-      </div>
-      
-      <div id="right">
-        <div id="align">
-          <div id="projects" class="vertical"> 
-            <h2>Check out my projects:</h2>
-            <ul>
-              <li>
-                <a href="https://github.com/c2000e/Polygonize">
-                  Polygonize (WIP)
-                </a>
-                <p class="indent">
-                  Evolve "stained glass" recreations of images using a
-                  combination of OpenGL's traditional rendering pipeline and
-                  compute shaders. 
-                </p>
-              </li>
-              <li>
-                <a href="https://github.com/c2000e/MarchingCubesReference">
-                  Marching Cubes
-                </a>
-                <p class="indent">
-                  A simple implementation of the marching cubes algorithm in C++
-                  that I plan to use as a stepping stone to build a more complex
-                  version that utilizes the GPU.
-                </p>
-              </li>
-              <li>
-                <a href="https://github.com/c2000e">All Projects</a>
-                <p class="indent">View all my work on Github.</p>
-              </li>
-            </ul>
-          </div>
-       
-          <div id="achievements" class="vertical">
-            <h2>Education and achievements:</h2>
-            <ul>
-              <li>
-                <p>BA in Physics &amp; BA in Mathematics, Expected 2022<p>
-                <p class="indent">Lewis &amp; Clark College, Portland, Oregon<p>
-              </li>
-	      <li>
-                <p>
-                  <a href="https://fhsu.edu/kams/">KAMS</a>
-                  Completion Certificate, 2018
-                </p>
-                <p class="indent">Fort Hays State University, Hays, Kansas</p>
-              </li>
-              <li>
-                <p>Eagle Scout Award, 2016</p>
-                <p class="indent">Troop 73, Liberal, Kansas</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="author" content="Christian Ermann"/>
+        <title>Christian Ermann</title>
+        <link rel="stylesheet" href="styles.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans"/>
+    </head>
 
-    <div id="footer" class="vertical horizontal">
-      <h2>Contact me:</h2>
-      <a href="mailto:christianermann@gmail.com">christianermann@gmail.com</a>
-    </div>
-  </body>
+    <body>
+        <div id="header">
+            <h2>Hi, I'm Christian!</h2>
+            <nav>
+                <h3>
+                    <a href="https://github.com/c2000e?tab=repositories">
+                        Projects
+                    </a>
+                </h3>
+            </nav>
+        </div>
+        <hr>
+        <div id="introduction">
+            <p>I'm currently studying math, physics, and computer science at
+            <a href="https://www.lclark.edu/">Lewis &amp; Clark College</a> in
+            Portland, Oregon. I also compete on the men's varsity crew team,
+            work in the physics department, and tutor at the <a href="https://college.lclark.edu/departments/mathematical_sciences/sqrc/">
+            SQRC</a>.</p>
+        </div>
+        <div id="projects">
+            <h2>Recent Projects:</h2>
+            <hr>
+            <ul>
+                <li class="project">
+                    <h4>
+                        <a href="https://github.com/c2000e/marching_cubes">
+                            Marching Cubes
+                        </a>
+                    </h4>
+                    <p>Render signed distance functions with the marching cubes
+                    algorithm. Utilizes OpenGL and C++.</p>
+                </li>
+                <li class="project">
+                    <h4>
+                        <a href="https://github.com/c2000e/Triangulate">
+                            Triangulate (WIP)
+                        </a>
+                    </h4>
+                    <p>Draw points, lines, and polygons and then triangulate
+                    them. Written in C++.</p>
+                </li>
+                <li class="project">
+                    <h4>
+                        <a href="https://github.com/c2000e/skej">
+                            Skej
+                        </a>
+                    </h4>
+                    <p>A REST-API for tracking deadlines built with python.</p>
+                </li>
+            </ul>
+        </div>
+        <div id="achievements">
+            <h2>Education and Achievements:</h2>
+            <hr>
+            <ul>
+                <li class="achievement">
+                    <p>B.A. in Physics &amp; B.A. in Mathematics, Expected May
+                    2022<p>
+                    <p class="indent">Lewis &amp; Clark College, Portland,
+                    Oregon<p>
+                </li>
+                <li class="achievement">
+                    <p>
+                    <a href="https://fhsu.edu/kams/">KAMS</a>
+                    Completion Certificate, 2018
+                    </p>
+                    <p class="indent">Fort Hays State University, Hays,
+                    Kansas</p>
+                </li>
+                <li class="achievement">
+                    <p>Eagle Scout Award, 2016</p>
+                    <p class="indent">Troop 73, Liberal, Kansas</p>
+                </li>
+            </ul>
+        </div>
+        <div id="footer">
+            <h2>Contact me:</h2>
+            <hr>
+            <a href="mailto:christianermann@gmail.com">
+                christianermann@gmail.com
+            </a>
+        </div>
+    </body>
 </html>
