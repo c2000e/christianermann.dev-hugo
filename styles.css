@@ -47,6 +47,10 @@ body {
     align-self: center;
 }
 
+#header a {
+    margin-left: 1em;
+}
+
 #introduction {
     margin-left: 1em;
     margin-bottom: 2em;
@@ -94,6 +98,10 @@ body {
   body {
     max-width: 400px;
     width: 90%;
+  }
+
+  #header a {
+    margin-left: 0em;
   }
 }
 
