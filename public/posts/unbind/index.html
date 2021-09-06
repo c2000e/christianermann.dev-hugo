@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Unbind Your Vertex Array Objects.</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body><header>
+    <div id="title">
+        <a href="https://www.christianermann.dev">Christian Ermann</a>
+    </div>
+    <nav>
+        
+            <a href="/">Main</a>.
+        
+            <a href="/posts/">Posts</a>.
+        
+            <a href="/tags/">Tags</a>.
+        
+            <a href="/resume.pdf">Resume</a>.
+        
+    </nav>
+</header>
+
+    <article>
+        <h1>Unbind Your Vertex Array Objects.</h1>
+        <div><p>When I first started learning about OpenGL, I always made sure to unbind each resource as soon as I was done using it. Over time I became more lenient with unbinding, as in many cases leaving resources bound is okay and leads to fewer API calls.</p>
+<p>In addition, when I&rsquo;m developing on my PC I have access to the newer Direct State Access (DSA) functions, so binding resources isn&rsquo;t something I have to worry about as much. However, I do a fair amount of programming on my macbook which means I don&rsquo;t always have access to the DSA functions.</p>
+<p>I was working on a project recently that involved the vertex and index data for a mesh frequently changing. The actual mesh struct has a bit more going on, but we can think of it like this for now:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">typedef</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">{</span>
+    <span style="color:#111">Vec3</span> <span style="color:#f92672">*</span><span style="color:#111">vertices</span><span style="color:#111">;</span>
+    <span style="color:#111">GLuint</span> <span style="color:#f92672">*</span><span style="color:#111">indices</span><span style="color:#111">;</span>
+    <span style="color:#111">GLuint</span> <span style="color:#111">vao</span><span style="color:#111">;</span>
+    <span style="color:#111">GLuint</span> <span style="color:#111">vbo</span><span style="color:#111">;</span>
+    <span style="color:#111">GLuint</span> <span style="color:#111">ebo</span><span style="color:#111">;</span>
+<span style="color:#111">}</span> <span style="color:#111">Mesh</span><span style="color:#111">;</span></code></pre></div>
+<p>So when it comes time to update the vertex or index data, we map the vertex buffer object to the vertices pointer and the element buffer object to the indices pointer. Then we can write all of our vertex and index data directly to the buffers, and then unmap them when we&rsquo;re all done and need to draw.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#111">...</span>
+
+<span style="color:#111">glBindBuffer</span><span style="color:#111">(</span><span style="color:#111">GL_ARRAY_BUFFER</span><span style="color:#111">,</span> <span style="color:#111">mesh</span><span style="color:#f92672">-&gt;</span><span style="color:#111">vbo</span><span style="color:#111">);</span>
+<span style="color:#111">mesh</span><span style="color:#f92672">-&gt;</span><span style="color:#111">vertices</span> <span style="color:#f92672">=</span> <span style="color:#111">glMapBuffer</span><span style="color:#111">(</span><span style="color:#111">GL_ARRAY_BUFFER</span><span style="color:#111">,</span> <span style="color:#111">GL_WRITE_ONLY</span><span style="color:#111">);</span>
+
+<span style="color:#111">glBindBuffer</span><span style="color:#111">(</span><span style="color:#111">GL_ELEMENT_ARRAY_BUFFER</span><span style="color:#111">,</span> <span style="color:#111">mesh</span><span style="color:#f92672">-&gt;</span><span style="color:#111">ebo</span><span style="color:#111">);</span>
+<span style="color:#111">mesh</span><span style="color:#f92672">-&gt;</span><span style="color:#111">indices</span> <span style="color:#f92672">=</span> <span style="color:#111">glMapBuffer</span><span style="color:#111">(</span><span style="color:#111">GL_ELEMENT_ARRAY_BUFFER</span><span style="color:#111">,</span> <span style="color:#111">GL_WRITE_ONLY</span><span style="color:#111">);</span>
+
+<span style="color:#75715e">// While we have the buffers mapped, we can write data directly to
+</span><span style="color:#75715e">// mesh-&gt;vertices and mesh-&gt;indices.
+</span><span style="color:#75715e"></span>
+<span style="color:#111">glBindBuffer</span><span style="color:#111">(</span><span style="color:#111">GL_ARRAY_BUFFER</span><span style="color:#111">,</span> <span style="color:#111">mesh</span><span style="color:#f92672">-&gt;</span><span style="color:#111">vbo</span><span style="color:#111">);</span>
+<span style="color:#111">glUnmapBuffer</span><span style="color:#111">(</span><span style="color:#111">GL_ARRAY_BUFFER</span><span style="color:#111">);</span>
+<span style="color:#111">mesh</span><span style="color:#f92672">-&gt;</span><span style="color:#111">vertices</span> <span style="color:#f92672">=</span> <span style="color:#111">NULL</span>
+
+<span style="color:#111">glBindBuffer</span><span style="color:#111">(</span><span style="color:#111">GL_ELEMENT_ARRAY_BUFFER</span><span style="color:#111">,</span> <span style="color:#111">mesh</span><span style="color:#f92672">-&gt;</span><span style="color:#111">ebo</span><span style="color:#111">);</span>
+<span style="color:#111">glUnmapBuffer</span><span style="color:#111">(</span><span style="color:#111">GL_ELEMENT_ARRAY_BUFFER</span><span style="color:#111">);</span>
+<span style="color:#111">mesh</span><span style="color:#f92672">-&gt;</span><span style="color:#111">indices</span> <span style="color:#f92672">=</span> <span style="color:#111">NULL</span>
+
+<span style="color:#75715e">// Now that the buffers are unmapped, we can draw the mesh again.
+</span><span style="color:#75715e"></span>
+<span style="color:#111">...</span></code></pre></div>
+<p>Leaving the buffers bound in the above snippet didn&rsquo;t cause problems and seemed a reasonable thing to do to reduce unnecessary OpenGL calls.
+The issues I was running into were actually caused by how I was drawing each mesh:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#111">...</span>
+
+<span style="color:#111">glBindVertexArray</span><span style="color:#111">(</span><span style="color:#111">mesh</span><span style="color:#f92672">-&gt;</span><span style="color:#111">vao</span><span style="color:#111">);</span>
+<span style="color:#111">glDrawElements</span><span style="color:#111">(...);</span>
+
+<span style="color:#111">...</span></code></pre></div>
+<p>Since I wasn&rsquo;t unbinding the mesh&rsquo;s vertex array object when I finished drawing it, when I updated another mesh&rsquo;s vertex or index data and bound that mesh&rsquo;s buffer objects, the vertex array object I forgot to unbind would now be using the incorrect buffers to draw with.</p>
+<p>Luckily, there was a simple fix, and now I know to be more careful with unbinding vertex array objects:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#111">...</span>
+
+<span style="color:#111">glBindVertexArray</span><span style="color:#111">(</span><span style="color:#111">mesh</span><span style="color:#f92672">-&gt;</span><span style="color:#111">vao</span><span style="color:#111">);</span>
+<span style="color:#111">glDrawElements</span><span style="color:#111">(...);</span>
+<span style="color:#111">glBindVertexArray</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">);</span>
+
+<span style="color:#111">...</span></code></pre></div>
+</div>
+    </article>
+<footer>
+    
+        <a href="https://github.com/c2000e">Github</a>.
+    
+        <a href="https://www.linkedin.com/in/christian-ermann/">LinkedIn</a>.
+    
+    <p>Copyright &copy; 2021 Christian Ermann.</p>
+</footer>
+</body>
+</html>

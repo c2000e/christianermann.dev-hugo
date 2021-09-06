@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenGL on Christian Ermann</title>
+    <link>https://www.christianermann.dev/tags/opengl/</link>
+    <description>Recent content in OpenGL on Christian Ermann</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 25 Aug 2021 14:33:02 -0500</lastBuildDate><atom:link href="https://www.christianermann.dev/tags/opengl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unbind Your Vertex Array Objects.</title>
+      <link>https://www.christianermann.dev/posts/unbind/</link>
+      <pubDate>Wed, 25 Aug 2021 14:33:02 -0500</pubDate>
+      
+      <guid>https://www.christianermann.dev/posts/unbind/</guid>
+      <description>When I first started learning about OpenGL, I always made sure to unbind each resource as soon as I was done using it. Over time I became more lenient with unbinding, as in many cases leaving resources bound is okay and leads to fewer API calls.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,52 @@
+baseURL = "https://www.christianermann.dev"
+languageCode = "en-us"
+title = "Christian Ermann"
+
+theme = "simple"
+
+pagination = 20
+summaryLength = 25
+
+[markup]
+    [markup.highlight]
+        style = 'monokailight'
+        tabWidth = 4
+
+[params]
+    author = "Christian Ermann"
+
+[menu]
+    [[menu.main]]
+        identifier = "main"
+        name = "Main"
+        url = "/"
+        weight = 1
+
+    [[menu.main]]
+        identifier = "posts"
+        name = "Posts"
+        url = "/posts/"
+        weight = 2
+
+    [[menu.main]]
+        identifier = "tags"
+        name = "Tags"
+        url = "/tags/"
+        weight = 3
+
+    [[menu.main]]
+        identifier = "resume"
+        name = "Resume"
+        url = "/resume.pdf"
+        weight = 4
+
+    [[menu.footer]]
+        name = "Github"
+        url = "https://github.com/c2000e"
+        weight = 1
+
+    [[menu.footer]]
+        name = "LinkedIn"
+        url = "https://www.linkedin.com/in/christian-ermann/"
+        weight = 2
+
