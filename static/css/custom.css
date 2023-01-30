@@ -1,0 +1,17 @@
+
+header {
+    padding-bottom: 20px;
+}
+
+nav {
+    float: left;
+}
+
+#web-loop {
+    float: right;
+}
+
+#main, #prev, #next {
+    color: #24a5d4;
+}
+

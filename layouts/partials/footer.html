@@ -1,0 +1,7 @@
+<footer>
+    {{ range .Site.Menus.footer }}
+        <a href="{{ .URL }}">{{ .Name }}</a>.
+    {{ end }}
+    <p>Copyright &copy; {{ now.Year }} {{ .Site.Params.author }}.</p>
+    <script src="{{ "/js/web-loop.js" | urlize | relURL }}"></script>
+</footer>

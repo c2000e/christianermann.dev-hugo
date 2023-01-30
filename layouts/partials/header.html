@@ -1,0 +1,12 @@
+<header>
+    <nav>
+        {{ range .Site.Menus.main }}
+            <a href="{{ .URL | relURL }}">{{ .Name }}</a>.
+        {{ end }}
+    </nav>
+    <nav id="web-loop" site="christianermann.dev">
+        <a id="main">Test Loop</a>:
+        <a id="prev">Prev</a>.
+        <a id="next">Next</a>.
+    </nav>
+</header>
