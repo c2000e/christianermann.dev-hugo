@@ -1,5 +1,5 @@
 
-const WEB_LOOP_DATA_URL = `https://github.com/c2000e/web-loops/blob/main/test-loop.json`;
+const WEB_LOOP_DATA_URL = `https://raw.githubusercontent.com/c2000e/web-loops/main/test-loop.json`
 
 window.onload = function() {
 
